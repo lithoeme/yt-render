@@ -1,4 +1,5 @@
 from flask import Flask, request, send_file, render_template
+import browser_cookie3
 import yt_dlp
 import os
 
@@ -14,10 +15,12 @@ def index():
 
 @app.route('/download', methods=['POST'])
 def download_video():
+    cookies = browser_cookie3.firefox()
     url = request.form['url']
     ydl_opts = {
         'outtmpl': f'{DOWNLOAD_DIR}/%(title)s.%(ext)s',
-        'format': 'best'
+        'format': 'best',
+        'cookies': cookies,  # Automatically get cookies from Chrome
     }
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         info = ydl.extract_info(url, download=True)
