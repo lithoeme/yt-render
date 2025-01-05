@@ -1,3 +1,4 @@
 yt-dlp~=2024.12.23
 Flask~=3.1.0
+Flask-SQLAlchemy==3.1.1
 gunicorn==23.0.0
